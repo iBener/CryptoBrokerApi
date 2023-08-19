@@ -1,0 +1,36 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# tye dashboard url: http://localhost:8000/
+#
+# to attach the debugger run with --debug option 
+# after that the application can be attach.
+# tye run --debug brokerapi
+#
+# to debug all services:
+# tye run --debug *
+#
+
+name: cryptobrokerapi
+services:
+- name: brokerapi
+  project: Crypto.BrokerApi/Crypto.BrokerApi.csproj
+  bindings:
+    - port: 7000
+
+- name: emailapi
+  project: Notify.EmailApi/Notify.EmailApi.csproj
+  bindings:
+    - port: 7001
+
+- name: pushapi
+  project: Notify.PushApi/Notify.PushApi.csproj
+  bindings:
+    - port: 7002
+
+- name: smsapi
+  project: Notify.SmsApi/Notify.SmsApi.csproj
+  bindings:
+    - port: 7003
+
+

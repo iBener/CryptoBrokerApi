@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+
+  crypto.brokerapi:
+    image: ${DOCKER_REGISTRY-}cryptobrokerapi
+    build:
+      context: .
+      dockerfile: Crypto.BrokerApi/Dockerfile
+
