@@ -11,28 +11,28 @@ services:
     image: ${DOCKER_REGISTRY-}cryptobrokerapi
     build:
       context: .
-      dockerfile: Crypto.BrokerApi/Dockerfile
+      dockerfile: Presentation/Crypto.BrokerApi/Dockerfile
 
   crypto.ordersapi:
     image: ${DOCKER_REGISTRY-}cryptoordersapi
     build:
       context: .
-      dockerfile: Crypto.OrdersApi/Dockerfile
+      dockerfile: Presentation/Crypto.OrdersApi/Dockerfile
 
   notify.emailapi:
     image: ${DOCKER_REGISTRY-}notifyemailapi
     build:
       context: .
-      dockerfile: Notify.EmailApi/Dockerfile
+      dockerfile: Presentation/Notify.EmailApi/Dockerfile
 
   notify.pushapi:
     image: ${DOCKER_REGISTRY-}notifypushapi
     build:
       context: .
-      dockerfile: Notify.PushApi/Dockerfile
+      dockerfile: Presentation/Notify.PushApi/Dockerfile
 
   notify.smsapi:
     image: ${DOCKER_REGISTRY-}notifysmsapi
     build:
       context: .
-      dockerfile: Notify.SmsApi/Dockerfile
+      dockerfile: Presentation/Notify.SmsApi/Dockerfile
