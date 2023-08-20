@@ -1,6 +1,7 @@
 using MMLib.Ocelot.Provider.AppConfiguration;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,5 +28,7 @@ app.UseSwaggerForOcelotUI(opt =>
 });
 
 app.UseHttpsRedirection();
+
+await app.UseOcelot();
 
 app.Run();

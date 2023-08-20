@@ -24,7 +24,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.DefaultModelsExpandDepth(-1);
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SwaggerOcelot.Order v1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crypto Broker Api v1");
 });
 
 app.UseHttpsRedirection();
@@ -34,7 +34,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/api", () =>
+app.MapGet("/api/broker", () =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast

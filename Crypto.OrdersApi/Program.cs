@@ -1,18 +1,31 @@
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Crypto Broker Api", Version = "v1" });
+});
+
+//builder.Configuration.AddEnvironmentVariables();
+//builder.Host.UseDefaultServiceProvider((context, options) =>
+//{
+//    options.ValidateOnBuild = false;
+//    options.ValidateScopes = false;
+//});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.DefaultModelsExpandDepth(-1);
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crypto Order Api v1");
+});
 
 app.UseHttpsRedirection();
 
@@ -21,7 +34,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/api/order", () =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
@@ -32,9 +45,7 @@ app.MapGet("/weatherforecast", () =>
         ))
         .ToArray();
     return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+});
 
 app.Run();
 

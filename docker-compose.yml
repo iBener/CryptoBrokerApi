@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: Crypto.BrokerApi/Dockerfile
 
-  crypto.orderapi:
+  crypto.ordersapi:
     image: ${DOCKER_REGISTRY-}cryptoordersapi
     build:
       context: .

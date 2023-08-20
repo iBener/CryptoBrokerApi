@@ -2,10 +2,10 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "ServiceName": "broker",
-      "UpstreamPathTemplate": "/api/broker-service/{everything}",
+      "ServiceName": "order",
+      "UpstreamPathTemplate": "/api/order-service/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
-      "SwaggerKey": "broker"
+      "SwaggerKey": "order"
     }
   ]
 }
