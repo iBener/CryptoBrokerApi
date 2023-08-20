@@ -13,3 +13,26 @@ services:
       context: .
       dockerfile: Crypto.BrokerApi/Dockerfile
 
+  crypto.orderapi:
+    image: ${DOCKER_REGISTRY-}cryptoordersapi
+    build:
+      context: .
+      dockerfile: Crypto.OrdersApi/Dockerfile
+
+  notify.emailapi:
+    image: ${DOCKER_REGISTRY-}notifyemailapi
+    build:
+      context: .
+      dockerfile: Notify.EmailApi/Dockerfile
+
+  notify.pushapi:
+    image: ${DOCKER_REGISTRY-}notifypushapi
+    build:
+      context: .
+      dockerfile: Notify.PushApi/Dockerfile
+
+  notify.smsapi:
+    image: ${DOCKER_REGISTRY-}notifysmsapi
+    build:
+      context: .
+      dockerfile: Notify.SmsApi/Dockerfile

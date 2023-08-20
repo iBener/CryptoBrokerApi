@@ -5,7 +5,11 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "apigateway": "StartDebugging",
-        "crypto.brokerapi": "StartDebugging"
+        "crypto.brokerapi": "StartDebugging",
+        "crypto.orderapi": "StartDebugging",
+        "notify.emailapi": "StartDebugging",
+        "notify.pushapi": "StartDebugging",
+        "notify.smsapi": "StartDebugging"
       }
     }
   }

@@ -1,0 +1,8 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "http://apigateway",
+    "ServiceDiscoveryProvider": {
+      "Type": "AppConfiguration"
+    }
+  }
+}
