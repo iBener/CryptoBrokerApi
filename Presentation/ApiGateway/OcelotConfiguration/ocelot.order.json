@@ -4,7 +4,7 @@
       "DownstreamPathTemplate": "/api/{everything}",
       "ServiceName": "order",
       "UpstreamPathTemplate": "/api/order-service/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete" ],
       "SwaggerKey": "order"
     }
   ]

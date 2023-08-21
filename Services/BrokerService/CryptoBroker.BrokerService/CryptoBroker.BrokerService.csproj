@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\CryptoBroker.Application\CryptoBroker.Application.csproj" />
+    <ProjectReference Include="..\..\..\Core\CryptoBroker.UnitOfWork\CryptoBroker.UnitOfWork.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\CryptoBroker.Entities\CryptoBroker.Entities.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\CryptoBroker.Models\CryptoBroker.Models.csproj" />
+  </ItemGroup>
+
+</Project>

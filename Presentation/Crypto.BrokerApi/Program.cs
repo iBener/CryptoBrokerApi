@@ -1,14 +1,23 @@
+using CryptoBroker.Application;
+using CryptoBroker.BrokerService.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddMediatR(typeof(Program));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Crypto Broker Api", Version = "v1" });
 });
+
+builder.Services.AddDbContext<BrokerDbContext>();
+builder.Services.AddControllers();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Host.UseDefaultServiceProvider((context, options) =>
@@ -29,27 +38,6 @@ app.UseSwaggerUI(c =>
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/api/broker", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
+app.MapControllers();
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

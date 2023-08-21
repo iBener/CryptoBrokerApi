@@ -15,4 +15,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\CryptoBroker.Models\CryptoBroker.Models.csproj" />
+    <ProjectReference Include="..\..\Services\BrokerService\CryptoBroker.BrokerService\CryptoBroker.BrokerService.csproj" />
+  </ItemGroup>
+
 </Project>
