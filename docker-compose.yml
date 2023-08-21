@@ -36,3 +36,6 @@ services:
     build:
       context: .
       dockerfile: Presentation/Notify.SmsApi/Dockerfile
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
