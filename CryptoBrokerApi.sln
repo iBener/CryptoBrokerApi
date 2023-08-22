@@ -56,17 +56,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoBroker.Models", "Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoBroker.Entities", "Infrastructure\CryptoBroker.Entities\CryptoBroker.Entities.csproj", "{FC37E1ED-3014-4283-B6EF-AD7148E9273D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoBroker.BrokerService.Entities", "Services\BrokerService\CryptoBroker.BrokerService.Entities\CryptoBroker.BrokerService.Entities.csproj", "{3964BE90-95A9-45DA-AE23-CD1E02C181E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoBroker.BrokerService.Entities", "Services\BrokerService\CryptoBroker.BrokerService.Entities\CryptoBroker.BrokerService.Entities.csproj", "{3964BE90-95A9-45DA-AE23-CD1E02C181E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BrokerService", "BrokerService", "{67D1D31C-BBA2-4F22-AE24-500932ECD014}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderService", "OrderService", "{6DD538FE-0D8F-454A-8432-02EA8133FEA3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoBroker.BrokerService", "Services\BrokerService\CryptoBroker.BrokerService\CryptoBroker.BrokerService.csproj", "{FD1DD9AD-567E-4634-926A-0E5CF1D7DD7B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoBroker.OrderService", "Services\OrderService\CryptoBroker.OrderService\CryptoBroker.OrderService.csproj", "{2C7278F7-EDB6-420F-A651-30FC02B2CCBB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoBroker.BrokerService.Models", "Services\BrokerService\CryptoBroker.BrokerService.Models\CryptoBroker.BrokerService.Models.csproj", "{C6A3662C-4EED-4E67-877B-148BEFFAE501}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoBroker.BrokerService.Models", "Services\BrokerService\CryptoBroker.BrokerService.Models\CryptoBroker.BrokerService.Models.csproj", "{C6A3662C-4EED-4E67-877B-148BEFFAE501}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,10 +146,6 @@ Global
 		{FD1DD9AD-567E-4634-926A-0E5CF1D7DD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD1DD9AD-567E-4634-926A-0E5CF1D7DD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD1DD9AD-567E-4634-926A-0E5CF1D7DD7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C7278F7-EDB6-420F-A651-30FC02B2CCBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C7278F7-EDB6-420F-A651-30FC02B2CCBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C7278F7-EDB6-420F-A651-30FC02B2CCBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C7278F7-EDB6-420F-A651-30FC02B2CCBB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C6A3662C-4EED-4E67-877B-148BEFFAE501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6A3662C-4EED-4E67-877B-148BEFFAE501}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6A3662C-4EED-4E67-877B-148BEFFAE501}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -181,9 +173,7 @@ Global
 		{FC37E1ED-3014-4283-B6EF-AD7148E9273D} = {6D2B2FB9-1D66-459C-9DA3-2FAF682BEED5}
 		{3964BE90-95A9-45DA-AE23-CD1E02C181E7} = {67D1D31C-BBA2-4F22-AE24-500932ECD014}
 		{67D1D31C-BBA2-4F22-AE24-500932ECD014} = {E859CF92-E77A-4D9E-A655-690D8939DEFC}
-		{6DD538FE-0D8F-454A-8432-02EA8133FEA3} = {E859CF92-E77A-4D9E-A655-690D8939DEFC}
 		{FD1DD9AD-567E-4634-926A-0E5CF1D7DD7B} = {67D1D31C-BBA2-4F22-AE24-500932ECD014}
-		{2C7278F7-EDB6-420F-A651-30FC02B2CCBB} = {6DD538FE-0D8F-454A-8432-02EA8133FEA3}
 		{C6A3662C-4EED-4E67-877B-148BEFFAE501} = {67D1D31C-BBA2-4F22-AE24-500932ECD014}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

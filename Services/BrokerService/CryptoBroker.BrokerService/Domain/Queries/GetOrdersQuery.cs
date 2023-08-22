@@ -14,7 +14,7 @@ public class GetOrdersQuery : IRequest<List<OrderModel>>
 {
     public GetOrdersQueryModel Query { get; }
 
-    public OrderStatus? Status { get; set; }
+    public OrderStatus? Status { get; }
 
     public GetOrdersQuery(GetOrdersQueryModel query)
     {

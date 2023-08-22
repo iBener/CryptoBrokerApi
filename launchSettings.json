@@ -6,7 +6,6 @@
       "serviceActions": {
         "apigateway": "StartDebugging",
         "crypto.brokerapi": "StartDebugging",
-        "crypto.ordersapi": "StartDebugging",
         "notify.emailapi": "StartDebugging",
         "notify.pushapi": "StartDebugging",
         "notify.smsapi": "StartDebugging"

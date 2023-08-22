@@ -16,7 +16,6 @@ public class GetOrdersQueryValidator : AbstractValidator<GetOrdersQuery>
     {
         RuleFor(x => x)
             .Must(q =>
-                (q.Query.Id is not null && q.Query.Id != 0) ||
                 !String.IsNullOrEmpty(q.Query.UserId) ||
                 !String.IsNullOrEmpty(q.Query.Status))
             .WithMessage("You must specifies at least one search criteria.");

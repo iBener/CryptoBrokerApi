@@ -13,12 +13,6 @@ services:
       context: .
       dockerfile: Presentation/Crypto.BrokerApi/Dockerfile
 
-  crypto.ordersapi:
-    image: ${DOCKER_REGISTRY-}cryptoordersapi
-    build:
-      context: .
-      dockerfile: Presentation/Crypto.OrdersApi/Dockerfile
-
   notify.emailapi:
     image: ${DOCKER_REGISTRY-}notifyemailapi
     build:

@@ -24,6 +24,7 @@ builder.Services.AddMediatR(cfg =>
 });
 
 builder.Services.AddScoped<IBrokerService, BrokerService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -33,7 +34,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<BrokerDbContext>();
 builder.Services.AddControllers();
 
-// Demo amaçlý
+// Test amaçlý
 builder.Services.AddHostedService<OrderUpdateBackgroundService>();
 
 builder.Configuration.AddEnvironmentVariables();

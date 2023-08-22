@@ -46,10 +46,6 @@ public class GetOrdersHandler : IRequestHandler<GetOrdersQuery, List<OrderModel>
         //}
 
         IQueryable<Order> query = _context.Orders.AsQueryable();
-        if (request.Query.Id > 0)
-        {
-            query = query.Where(x => x.Id == request.Query.Id);
-        }
         if (!String.IsNullOrEmpty(request.Query.UserId))
         {
             query = query.Where(x => x.UserId == request.Query.UserId);

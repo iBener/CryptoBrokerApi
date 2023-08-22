@@ -25,7 +25,7 @@ public class GetOrderHandler : IRequestHandler<GetOrderQuery, OrderModel>
 
     public async Task<OrderModel> Handle(GetOrderQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Orders.FindAsync(request.Id, cancellationToken);
+        var result = await _context.Orders.FindAsync(request.OrderId, cancellationToken);
         return _mapper.Map<OrderModel>(result);
     }
 }

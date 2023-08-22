@@ -1,4 +1,5 @@
-﻿using CryptoBroker.BrokerService.Domain.Commands;
+﻿using CryptoBroker.Application;
+using CryptoBroker.BrokerService.Domain.Commands;
 using CryptoBroker.BrokerService.Domain.Queries;
 using CryptoBroker.Models;
 using CryptoBroker.Models.Queries;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.BrokerService;
 
-public class BrokerService : IBrokerService
+public class BrokerService : ServiceBase, IBrokerService
 {
     private readonly IMediator _mediator;
 
@@ -28,21 +29,7 @@ public class BrokerService : IBrokerService
         return result;
     }
 
-    public async Task<OrderModel> GetOrder(int id)
-    {
-        var query = new GetOrderQuery() { Id = id };
-        var result = await _mediator.Send(query);
-        return result;
-    }
-
-    public async Task<List<OrderModel>> GetOrders(GetOrdersQueryModel queryModel)
-    {
-        var query = new GetOrdersQuery(queryModel);
-        var result = await _mediator.Send(query);
-        return result;
-    }
-
-    public Task<OrderModel> CancelOrder(int id)
+    public Task<OrderModel> CancelOrder(int id, string userId)
     {
         throw new NotImplementedException();
     }
