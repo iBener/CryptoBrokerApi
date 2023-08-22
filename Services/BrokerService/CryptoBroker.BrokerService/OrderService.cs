@@ -22,7 +22,7 @@ public class OrderService : ServiceBase, IOrderService
 
     public async Task<OrderModel> GetActiveOrder(string userId)
     {
-        var query = new GetActiveOrderQuery();
+        var query = new GetActiveOrderQuery() { UserId = userId };
         var result = await _mediator.Send(query);
         return result;
     }

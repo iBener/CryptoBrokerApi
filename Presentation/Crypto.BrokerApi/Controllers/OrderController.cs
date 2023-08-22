@@ -17,10 +17,18 @@ public class OrderController : BaseController
     }
 
     // GET api/<BrokerController>/5
-    [HttpGet("{userId}/{orderId}")]
-    public async Task<IActionResult> Get(string userId, int id)
+    [HttpGet("ActiveOrder/{userId}")]
+    public async Task<IActionResult> Get(string userId)
     {
-        var result = await _orderService.GetOrder(userId, id);
+        var result = await _orderService.GetActiveOrder(userId);
+        return result is null ? NotFound() : Ok(result);
+    }
+
+    // GET api/<BrokerController>/5
+    [HttpGet("{userId}/{orderId}")]
+    public async Task<IActionResult> Get(string userId, int orderId)
+    {
+        var result = await _orderService.GetOrder(userId, orderId);
         return result is null ? NotFound() : Ok(result);
     }
 
