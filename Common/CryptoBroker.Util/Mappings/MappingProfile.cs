@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CryptoBroker.Util.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +12,44 @@ namespace CryptoBroker.Util.Mappings;
 
 public class MappingProfile : Profile
 {
-    public MappingProfile()
+    public MappingProfile(Assembly assembly)
     {
-        ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+        ApplyMappingsFromAssembly(assembly);
+    }
+
+    public MappingProfile(List<Assembly> assemblies)
+    {
+        ApplyMappingsFromAssemblies(assemblies);
     }
 
     private void ApplyMappingsFromAssembly(Assembly assembly)
     {
-        var types = assembly.GetExportedTypes()
-            .Where(t => t.GetInterfaces().Any(i =>
-                i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
-            .ToList();
+        var assemblies = ReflectionUtilities.GetReferencedAssemblies(assembly);
+        ApplyMappingsFromAssemblies(assemblies);
+    }
 
-        foreach (var type in types)
+    private void ApplyMappingsFromAssemblies(List<Assembly> assemblies)
+    {
+        foreach (var item in assemblies)
         {
-            var instance = Activator.CreateInstance(type);
-            var methodInfo = type.GetMethod("Mapping");
-            methodInfo?.Invoke(instance, new object[] { this });
+            var types = item.GetExportedTypes()
+                .Where(t => t.GetInterfaces().Any(i =>
+                    i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+                .ToList();
+
+            foreach (var type in types)
+            {
+                var instance = Activator.CreateInstance(type);
+                var methodInfo = type.GetMethod("Mapping");
+
+                if (methodInfo is null)
+                {
+                    var intrfc = instance?.GetType().GetInterface("IMapFrom`1");
+                    methodInfo = intrfc?.GetMethod("Mapping");
+                }
+
+                methodInfo?.Invoke(instance, new object[] { this });
+            }
         }
     }
 }

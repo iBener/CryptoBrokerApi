@@ -1,4 +1,5 @@
 ﻿using CryptoBroker.Models;
+using CryptoBroker.Models.Requests;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace CryptoBroker.BrokerService.Domain.Commands;
 
 public class CreateOrderCommand : IRequest<OrderModel>
 {
-    public OrderModel Order { get; }
+    public CreateOrderRequestModel Order { get; }
 
-    public CreateOrderCommand(OrderModel order)
+    public CreateOrderCommand(CreateOrderRequestModel order)
     {
         Order = order;
     }

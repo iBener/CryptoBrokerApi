@@ -1,15 +1,29 @@
+using Crypto.BrokerApi.BackgroundServices;
 using CryptoBroker.Application;
+using CryptoBroker.Application.Middlewares;
+using CryptoBroker.BrokerService;
+using CryptoBroker.BrokerService.Domain.Commands;
 using CryptoBroker.BrokerService.Persistence;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System;
+using System.ComponentModel;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddApplicationServices(Assembly.GetExecutingAssembly());
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(BrokerService).Assembly);
+});
 
+builder.Services.AddScoped<IBrokerService, BrokerService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -18,6 +32,9 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<BrokerDbContext>();
 builder.Services.AddControllers();
+
+// Demo amaçlý
+builder.Services.AddHostedService<OrderUpdateBackgroundService>();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Host.UseDefaultServiceProvider((context, options) =>
@@ -29,6 +46,7 @@ builder.Host.UseDefaultServiceProvider((context, options) =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseApplicationExceptionHandler();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

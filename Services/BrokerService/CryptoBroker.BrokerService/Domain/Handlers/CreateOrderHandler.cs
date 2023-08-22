@@ -1,7 +1,10 @@
-﻿using CryptoBroker.BrokerService.Domain.Commands;
+﻿using AutoMapper;
+using CryptoBroker.BrokerService.Domain.Commands;
 using CryptoBroker.BrokerService.Persistence;
 using CryptoBroker.Entities;
 using CryptoBroker.Models;
+using CryptoBroker.Models.Enums;
+using FluentValidation;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -14,33 +17,24 @@ namespace CryptoBroker.BrokerService.Domain.Handlers;
 public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderModel>
 {
     private readonly BrokerDbContext _context;
+    private readonly IMapper _mapper;
+    private readonly IValidator<CreateOrderCommand> _validator;
 
-    public CreateOrderHandler(BrokerDbContext context)
+    public CreateOrderHandler(BrokerDbContext context, IMapper mapper, IValidator<CreateOrderCommand> validator)
     {
         _context = context;
+        _mapper = mapper;
+        _validator = validator;
     }
 
     public async Task<OrderModel> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = new Order
-        {
-            Id = request.Order.Id,
-            Amount = request.Order.Amount,
-            NotificationType = request.Order.NotificationType,
-            Price = request.Order.Price,
-            UserId = request.Order.UserId
-        };
+        _validator.ValidateAndThrow(request);
+        var order = _mapper.Map<Order>(request.Order);
+        order.Status = (int)OrderStatus.Open;
+        order.Date = DateTime.Now;
         _context.Orders.Add(order);
         await _context.SaveChangesAsync(cancellationToken);
-        var result = new OrderModel
-        {
-            Id = order.Id,
-            Amount = order.Amount,
-            NotificationType = order.NotificationType,
-            Price = order.Price,
-            UserId = order.UserId
-        };
-
-        return result;
+        return _mapper.Map<OrderModel>(order);
     }
 }

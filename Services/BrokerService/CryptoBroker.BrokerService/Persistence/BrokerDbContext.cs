@@ -15,5 +15,11 @@ public class BrokerDbContext : EfDbContextBase
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+
+        base.OnModelCreating(modelBuilder);
+    }
+
     public DbSet<Order> Orders { get; set; }
 }

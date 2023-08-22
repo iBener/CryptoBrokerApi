@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\CryptoBroker.Util\CryptoBroker.Util.csproj" />
+  </ItemGroup>
+
 </Project>
