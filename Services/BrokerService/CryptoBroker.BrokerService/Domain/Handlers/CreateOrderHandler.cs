@@ -30,11 +30,14 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderModel
     public async Task<OrderModel> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         _validator.ValidateAndThrow(request);
+
+        // Create order
         var order = _mapper.Map<Order>(request.Order);
         order.Status = (int)OrderStatus.Open;
         order.Date = DateTime.Now;
         _context.Orders.Add(order);
         await _context.SaveChangesAsync(cancellationToken);
+
         return _mapper.Map<OrderModel>(order);
     }
 }

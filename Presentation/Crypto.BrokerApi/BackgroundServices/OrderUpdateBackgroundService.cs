@@ -17,8 +17,13 @@ public class OrderUpdateBackgroundService : BackgroundService
         _context = context;
     }
 
+    /// <summary>
+    /// Test amaçlı belli bir süre sonra emirleri tamamlandı durumuna çeker
+    /// </summary>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        const int waitSeconds = 300;
+
         while (!stoppingToken.IsCancellationRequested)
         {
             await Task.Delay(5000, stoppingToken);
@@ -26,7 +31,7 @@ public class OrderUpdateBackgroundService : BackgroundService
             // !!! In-memory databse'de ExecuteSql metodu çalışmıyor
             //_context.Database.ExecuteSql($"update Orders set Status = 2 where Status = 1 and Date <= dateadd(s, -30, getdate())");
 
-            var allOpenOrders = _context.Orders.Where(x => x.Status == (int)OrderStatus.Open && x.Date < DateTime.Now.AddSeconds(-30)).ToList();
+            var allOpenOrders = _context.Orders.Where(x => x.Status == (int)OrderStatus.Open && x.Date < DateTime.Now.AddSeconds(-waitSeconds)).ToList();
             if (allOpenOrders?.Any() ?? false)
             {
                 foreach (var order in allOpenOrders)

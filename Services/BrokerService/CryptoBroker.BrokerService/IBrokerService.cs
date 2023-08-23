@@ -13,5 +13,5 @@ namespace CryptoBroker.BrokerService;
 public interface IBrokerService : IServiceBase
 {
     Task<OrderModel> CreateOrder(CreateOrderRequestModel order);
-    Task<OrderModel> CancelOrder(int id, string userId);
+    Task<OrderModel> CancelOrder(string userId, int orderId);
 }

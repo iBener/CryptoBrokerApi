@@ -30,10 +30,10 @@ public class BrokerController : BaseController
     }
 
     // DELETE api/<BrokerController>/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id, string userId)
+    [HttpDelete("{userId}/{orderId:int}")]
+    public async Task<IActionResult> Delete(string userId, int orderId)
     {
-        var result = await _brokerService.CancelOrder(id, userId);
+        var result = await _brokerService.CancelOrder(userId, orderId);
         return result is null ? NotFound() : Ok(result);
     }
 }

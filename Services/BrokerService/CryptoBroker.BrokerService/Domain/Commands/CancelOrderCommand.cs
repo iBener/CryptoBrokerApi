@@ -10,5 +10,13 @@ namespace CryptoBroker.BrokerService.Domain.Commands;
 
 public class CancelOrderCommand : IRequest<OrderModel>
 {
-    public int Id { get; set; }
+    public CancelOrderCommand(string userId, int orderId)
+    {
+        UserId = userId;
+        OrderId = orderId;
+    }
+
+    public string UserId { get; }
+ 
+    public int OrderId { get; }
 }

@@ -2,12 +2,14 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CryptoBroker.UnitOfWork;
 
+[DebuggerStepThrough]
 public abstract class EfDbContextBase : DbContext
 {
     public EfDbContextBase(string databaseName)

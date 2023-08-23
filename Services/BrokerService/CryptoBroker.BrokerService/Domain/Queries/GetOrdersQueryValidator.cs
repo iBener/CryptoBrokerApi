@@ -14,11 +14,13 @@ public class GetOrdersQueryValidator : AbstractValidator<GetOrdersQuery>
 {
     public GetOrdersQueryValidator()
     {
-        RuleFor(x => x)
-            .Must(q =>
-                !String.IsNullOrEmpty(q.Query.UserId) ||
-                !String.IsNullOrEmpty(q.Query.Status))
-            .WithMessage("You must specifies at least one search criteria.");
+        RuleFor(x => x.Query.UserId).NotNull().NotEmpty();
+        
+        //RuleFor(x => x)
+        //    .Must(q =>
+        //        !String.IsNullOrEmpty(q.Query.UserId) ||
+        //        !String.IsNullOrEmpty(q.Query.Status))
+        //    .WithMessage("You must specifies at least one search criteria.");
 
         RuleFor(x => x)
             .Must(q => String.IsNullOrEmpty(q.Query.Status) || q.Status is not null)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.Models.Enums;
 
-public enum OrderStatus
+public enum OrderStatus : byte
 {
     New,
     Open,

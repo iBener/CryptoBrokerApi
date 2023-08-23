@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.Models.Enums;
 
-public enum NotificationType
+public enum NotificationType : byte
 {
     Sms,
     Email,

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CryptoBroker.Application;
@@ -28,6 +29,10 @@ public static class ApplicationExtensions
 
         // FluentValidation
         services.AddValidatorsFromAssemblies(assemblies);
+
+        services.AddControllers()
+            .AddJsonOptions(options =>
+               options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault);
 
         return services;
     }

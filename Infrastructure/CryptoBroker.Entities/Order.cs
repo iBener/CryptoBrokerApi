@@ -12,13 +12,15 @@ public class Order
 
     public string UserId { get; set; } = String.Empty;
 
-    public int Amount { get; set; }
+    public decimal Amount { get; set; }
 
-    public int Price { get; set; }
+    public decimal Price { get; set; }
 
-    public string NotificationType { get; set; } = String.Empty;
+    public byte Status { get; set; }
 
-    public int Status { get; set; }
+    public DateTime Date { get; set; }
 
-    public DateTime Date { get; set; } = DateTime.Now;
+    public virtual ICollection<NotificationChannel>? NotificationChannels { get; set; }
+
+    public virtual ICollection<Notification>? Notifications { get; set; }
 }

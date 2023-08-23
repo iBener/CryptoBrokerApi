@@ -1,6 +1,7 @@
 ﻿using CryptoBroker.Application;
 using CryptoBroker.BrokerService.Domain.Commands;
 using CryptoBroker.BrokerService.Domain.Queries;
+using CryptoBroker.Entities;
 using CryptoBroker.Models;
 using CryptoBroker.Models.Queries;
 using CryptoBroker.Models.Requests;
@@ -24,13 +25,21 @@ public class BrokerService : ServiceBase, IBrokerService
 
     public async Task<OrderModel> CreateOrder(CreateOrderRequestModel order)
     {
+        // Create order
         var command = new CreateOrderCommand(order);
         var result = await _mediator.Send(command);
+
+        // Create channels
+        var channelCommand = new CreateOrderNotificationChannelCommand(result);
+        await _mediator.Send(channelCommand);
+
         return result;
     }
 
-    public Task<OrderModel> CancelOrder(int id, string userId)
+    public async Task<OrderModel> CancelOrder(string userId, int orderId)
     {
-        throw new NotImplementedException();
+        var command = new CancelOrderCommand(userId, orderId);
+        var result = await _mediator.Send(command);
+        return result;
     }
 }

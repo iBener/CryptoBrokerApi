@@ -29,6 +29,8 @@ app.UseSwaggerForOcelotUI(opt =>
 
 app.UseHttpsRedirection();
 
+await Task.Delay(2000); // test
+
 await app.UseOcelot();
 
 app.Run();
