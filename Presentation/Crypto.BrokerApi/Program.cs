@@ -21,26 +21,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
-builder.Services.AddApplicationServices(Assembly.GetExecutingAssembly());
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssembly(typeof(BrokerService).Assembly);
-});
-
+builder.Services.AddApplicationServices<BrokerService>("Crypto Broker Api");
 builder.Services.AddScoped<IBrokerService, BrokerService>();
-builder.Services.AddScoped<INotificationService, NotificationService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Crypto Broker Api", Version = "v1" });
-});
-
 builder.Services.AddDbContext<BrokerDbContext>();
-
-// Test amaçlý
-builder.Services.AddHostedService<OrderUpdateBackgroundService>();
 
 // Event bus
 builder.Services.AddApplicationEventBus<BrokerService>(async bus =>
@@ -49,17 +32,8 @@ builder.Services.AddApplicationEventBus<BrokerService>(async bus =>
     await bus.Subscribe<UpdateNotificationCompleted>();
 });
 
-//builder.Services.AddRebus(rebus => rebus
-//            .Routing(r =>
-//                r.TypeBased().MapAssemblyOf<BrokerService>($"crypto-que"))
-//            .Transport(t =>
-//                t.UseRabbitMq(connectionString: "amqp://rabbitmq:5672", $"crypto-que"))
-//            .Sagas(s => s.StoreInMemory()), onCreated: async bus =>
-//            {
-//                await bus.Subscribe<OrderNotificationSent>();
-//                await bus.Subscribe<UpdateNotificationCompleted>();
-//            });
-//builder.Services.AutoRegisterHandlersFromAssemblyOf<BrokerService>();
+// Test amaçlý
+builder.Services.AddHostedService<OrderUpdateBackgroundService>();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Host.UseDefaultServiceProvider((context, options) =>

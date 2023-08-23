@@ -25,6 +25,19 @@
           }
         }
       ]
+    },
+    {
+      "Key": "notify",
+      "Config": [
+        {
+          "Name": "Crypto Notification Api",
+          "Version": "v1",
+          "Service": {
+            "Name": "notify",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
     }
   ]
 }

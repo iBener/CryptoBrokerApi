@@ -4,11 +4,10 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "apigateway": "StartDebugging",
+        "crypto.apigateway": "StartDebugging",
         "crypto.brokerapi": "StartDebugging",
-        "notify.emailapi": "StartDebugging",
-        "notify.pushapi": "StartDebugging",
-        "notify.smsapi": "StartDebugging"
+        "crypto.ordersapi": "StartDebugging",
+        "crypto.notificationapi": "StartDebugging"
       }
     }
   }

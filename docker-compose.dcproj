@@ -6,8 +6,8 @@
     <ProjectGuid>8e80aa68-53a5-4ce0-a06e-c761741b82a6</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>apigateway</DockerServiceName>
-    <DockerComposeProjectName>cryptobrokerapi-compose</DockerComposeProjectName>
+    <DockerServiceName>crypto.apigateway</DockerServiceName>
+    <DockerComposeProjectName>cryptoapi-compose</DockerComposeProjectName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

@@ -1,6 +1,6 @@
 using CryptoBroker.Application;
-using CryptoBroker.OrderService;
-using CryptoBroker.OrderService.Persistence;
+using CryptoBroker.NotificationService;
+using CryptoBroker.NotificationService.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,14 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
-builder.Services.AddApplicationServices<OrderService>("Crypto Orders Api");
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddDbContext<OrderDbContext>();
+
+builder.Services.AddApplicationServices<NotificationService>("Crypto Notification Api");
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddDbContext<NotificationDbContext>();
 
 // Event bus
-builder.Services.AddApplicationEventBus<OrderService>(async bus =>
+builder.Services.AddApplicationEventBus<NotificationService>(async bus =>
 {
     //await bus.Subscribe<OrderNotificationSent>();
     //await bus.Subscribe<UpdateNotificationCompleted>();

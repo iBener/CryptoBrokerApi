@@ -1,17 +1,9 @@
 ﻿using CryptoBroker.Application;
 using CryptoBroker.BrokerService.Domain.Commands;
-using CryptoBroker.BrokerService.Domain.Queries;
-using CryptoBroker.Entities;
 using CryptoBroker.Models;
-using CryptoBroker.Models.Queries;
 using CryptoBroker.Models.Requests;
 using MediatR;
 using Rebus.Bus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CryptoBroker.BrokerService;
 
@@ -37,7 +29,7 @@ public class BrokerService : ServiceBase, IBrokerService
         await _mediator.Send(channelCommand);
 
         // Publish create order message to bus
-        await _bus.Send(new OrderCreatedEvent(result.Id));
+        await _bus.Send(new SendOrderNotification(result.Id));
 
         return result;
     }

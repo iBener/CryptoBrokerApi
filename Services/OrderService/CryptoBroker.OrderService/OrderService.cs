@@ -1,5 +1,5 @@
 ﻿using CryptoBroker.Application;
-using CryptoBroker.BrokerService.Domain.Queries;
+using CryptoBroker.OrderService.Domain.Queries;
 using CryptoBroker.Models.Queries;
 using CryptoBroker.Models;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace CryptoBroker.BrokerService;
+namespace CryptoBroker.OrderService;
 
 public class OrderService : ServiceBase, IOrderService
 {

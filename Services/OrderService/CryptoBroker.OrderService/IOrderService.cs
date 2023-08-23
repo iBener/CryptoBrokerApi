@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoBroker.BrokerService;
+namespace CryptoBroker.OrderService;
 
 public interface IOrderService : IServiceBase
 {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CryptoBroker.BrokerService.Persistence;
+using CryptoBroker.NotificationService.Persistence;
 using CryptoBroker.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,14 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoBroker.BrokerService;
+namespace CryptoBroker.NotificationService;
 
 public class NotificationService : INotificationService
 {
-    private readonly BrokerDbContext _context;
+    private readonly NotificationDbContext _context;
     private readonly IMapper _mapper;
 
-    public NotificationService(BrokerDbContext context, IMapper mapper)
+    public NotificationService(NotificationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

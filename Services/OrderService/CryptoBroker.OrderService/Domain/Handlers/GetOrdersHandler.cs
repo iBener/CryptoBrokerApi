@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using CryptoBroker.BrokerService.Domain.Commands;
-using CryptoBroker.BrokerService.Domain.Queries;
-using CryptoBroker.BrokerService.Persistence;
 using CryptoBroker.Entities;
 using CryptoBroker.Models;
 using CryptoBroker.Models.Queries;
+using CryptoBroker.OrderService.Domain.Queries;
+using CryptoBroker.OrderService.Persistence;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +18,11 @@ namespace CryptoBroker.BrokerService.Domain.Handlers;
 
 public class GetOrdersHandler : IRequestHandler<GetOrdersQuery, List<OrderModel>>
 {
-    private readonly BrokerDbContext _context;
+    private readonly OrderDbContext _context;
     private readonly IValidator<GetOrdersQuery> _validator;
     private readonly IMapper _mapper;
 
-    public GetOrdersHandler(BrokerDbContext context, IValidator<GetOrdersQuery> validator, IMapper mapper)
+    public GetOrdersHandler(OrderDbContext context, IValidator<GetOrdersQuery> validator, IMapper mapper)
     {
         _context = context;
         _validator = validator;

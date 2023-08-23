@@ -1,8 +1,8 @@
 ﻿using CryptoBroker.Application.Controllers;
-using CryptoBroker.BrokerService;
+using CryptoBroker.NotificationService;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Crypto.BrokerApi.Controllers;
+namespace Crypto.NotificationApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

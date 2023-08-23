@@ -1,5 +1,5 @@
 ﻿using CryptoBroker.Application.Controllers;
-using CryptoBroker.BrokerService;
+using CryptoBroker.OrderService;
 using CryptoBroker.Models.Queries;
 using Microsoft.AspNetCore.Mvc;
 

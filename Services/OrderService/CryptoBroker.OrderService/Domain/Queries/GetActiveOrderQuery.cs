@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoBroker.BrokerService.Domain.Queries;
+namespace CryptoBroker.OrderService.Domain.Queries;
 
 public class GetActiveOrderQuery : IRequest<OrderModel>
 {
-    public string UserId { get; set; } = String.Empty;
+    public string UserId { get; set; } = string.Empty;
 }

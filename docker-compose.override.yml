@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  apigateway:
+  crypto.apigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
@@ -12,9 +12,8 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
       - crypto.brokerapi
-      - notify.emailapi
-      - notify.pushapi
-      - notify.smsapi
+      - crypto.ordersapi
+      - crypto.notifyapi
 
   crypto.brokerapi:
     environment:
@@ -24,40 +23,30 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - rabbitmq
+      - crypto.rabbitmq
 
-  notify.emailapi:
+  crypto.ordersapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=http://+:5000
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - rabbitmq
+      - crypto.rabbitmq
 
-  notify.pushapi:
+  crypto.notifyapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=http://+:5000
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - rabbitmq
+      - crypto.rabbitmq
 
-  notify.smsapi:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-    depends_on:
-      - rabbitmq
-
-  rabbitmq:
-    container_name: rabbitmq
+  crypto.rabbitmq:
+    container_name: crypto-mq
     restart: always
     ports:
       - "5672:5672"

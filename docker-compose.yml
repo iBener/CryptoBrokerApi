@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  apigateway:
+  crypto.apigateway:
     image: ${DOCKER_REGISTRY-}apigateway
     build:
       context: .
@@ -13,23 +13,17 @@ services:
       context: .
       dockerfile: Presentation/Crypto.BrokerApi/Dockerfile
 
-  notify.emailapi:
-    image: ${DOCKER_REGISTRY-}notifyemailapi
+  crypto.ordersapi:
+    image: ${DOCKER_REGISTRY-}cryptoordersapi
     build:
       context: .
-      dockerfile: Presentation/Notify.EmailApi/Dockerfile
+      dockerfile: Presentation/Crypto.OrdersApi/Dockerfile
 
-  notify.pushapi:
-    image: ${DOCKER_REGISTRY-}notifypushapi
+  crypto.notifyapi:
+    image: ${DOCKER_REGISTRY-}cryptonotifyapi
     build:
       context: .
-      dockerfile: Presentation/Notify.PushApi/Dockerfile
+      dockerfile: Presentation/Crypto.NotificationApi/Dockerfile
 
-  notify.smsapi:
-    image: ${DOCKER_REGISTRY-}notifysmsapi
-    build:
-      context: .
-      dockerfile: Presentation/Notify.SmsApi/Dockerfile
-
-  rabbitmq:
+  crypto.rabbitmq:
     image: rabbitmq:3-management-alpine
