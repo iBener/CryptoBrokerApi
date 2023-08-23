@@ -2,6 +2,9 @@
 using CryptoBroker.Util.Reflection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Rebus.Config;
+using Rebus.Persistence.InMem;
+using Rebus.Routing.TypeBased;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +38,19 @@ public static class ApplicationExtensions
                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault);
 
         return services;
+    }
+
+    public static IServiceCollection AddApplicationEventBus<T>(this IServiceCollection services, Func<Rebus.Bus.IBus, Task>? onCreated = null)
+    {
+        services.AddRebus(rebus => rebus
+            .Routing(r =>
+                r.TypeBased().MapAssemblyOf<T>($"crypto-que"))
+            .Transport(t =>
+                t.UseRabbitMq(connectionString: "amqp://rabbitmq:5672", $"crypto-que"))
+            .Sagas(s => s.StoreInMemory()), onCreated: onCreated);
+
+        services.AutoRegisterHandlersFromAssemblyOf<T>();
+
+        return services!;
     }
 }

@@ -1,3 +1,4 @@
+using Crypto.BrokerApi;
 using Crypto.BrokerApi.BackgroundServices;
 using CryptoBroker.Application;
 using CryptoBroker.Application.Middlewares;
@@ -6,8 +7,12 @@ using CryptoBroker.BrokerService.Domain.Commands;
 using CryptoBroker.BrokerService.Persistence;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Rebus.Config;
+using Rebus.Persistence.InMem;
+using Rebus.Routing.TypeBased;
 using System;
 using System.ComponentModel;
 using System.Reflection;
@@ -36,6 +41,25 @@ builder.Services.AddDbContext<BrokerDbContext>();
 
 // Test amaçlý
 builder.Services.AddHostedService<OrderUpdateBackgroundService>();
+
+// Event bus
+builder.Services.AddApplicationEventBus<BrokerService>(async bus =>
+{
+    await bus.Subscribe<OrderNotificationSent>();
+    await bus.Subscribe<UpdateNotificationCompleted>();
+});
+
+//builder.Services.AddRebus(rebus => rebus
+//            .Routing(r =>
+//                r.TypeBased().MapAssemblyOf<BrokerService>($"crypto-que"))
+//            .Transport(t =>
+//                t.UseRabbitMq(connectionString: "amqp://rabbitmq:5672", $"crypto-que"))
+//            .Sagas(s => s.StoreInMemory()), onCreated: async bus =>
+//            {
+//                await bus.Subscribe<OrderNotificationSent>();
+//                await bus.Subscribe<UpdateNotificationCompleted>();
+//            });
+//builder.Services.AutoRegisterHandlersFromAssemblyOf<BrokerService>();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Host.UseDefaultServiceProvider((context, options) =>

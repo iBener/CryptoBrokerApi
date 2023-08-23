@@ -6,6 +6,7 @@ using CryptoBroker.Models;
 using CryptoBroker.Models.Queries;
 using CryptoBroker.Models.Requests;
 using MediatR;
+using Rebus.Bus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,12 @@ namespace CryptoBroker.BrokerService;
 public class BrokerService : ServiceBase, IBrokerService
 {
     private readonly IMediator _mediator;
+    private readonly IBus _bus;
 
-    public BrokerService(IMediator mediator)
+    public BrokerService(IMediator mediator, IBus bus)
     {
         _mediator = mediator;
+        _bus = bus;
     }
 
     public async Task<OrderModel> CreateOrder(CreateOrderRequestModel order)
@@ -32,6 +35,9 @@ public class BrokerService : ServiceBase, IBrokerService
         // Create channels
         var channelCommand = new CreateOrderNotificationChannelCommand(result);
         await _mediator.Send(channelCommand);
+
+        // Publish create order message to bus
+        await _bus.Send(new OrderCreatedEvent(result.Id));
 
         return result;
     }

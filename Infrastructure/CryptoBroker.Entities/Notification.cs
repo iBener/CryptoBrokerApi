@@ -14,7 +14,7 @@ public class Notification
 
     public byte Type { get; set; }
 
-    public bool Success { get; set; }
+    public bool? Success { get; set; }
 
     public DateTime? Date { get; set; }
 
