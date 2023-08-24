@@ -19,7 +19,7 @@ builder.Services.AddApplicationEventBus<BrokerService>(async bus =>
 });
 
 // Test amaçlý
-builder.Services.AddHostedService<OrderUpdateBackgroundService>();
+//builder.Services.AddHostedService<OrderUpdateBackgroundService>();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Host.UseDefaultServiceProvider((context, options) =>
