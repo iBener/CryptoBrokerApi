@@ -1,6 +1,6 @@
 using CryptoBroker.Application;
 using CryptoBroker.OrderService;
-using CryptoBroker.OrderService.Persistence;
+using CryptoBroker.EventBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,6 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddApplicationServices<OrderService>("Crypto Orders Api");
 builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddDbContext<OrderDbContext>();
 
 // Event bus
 builder.Services.AddApplicationEventBus<OrderService>(async bus =>

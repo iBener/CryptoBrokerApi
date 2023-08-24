@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace CryptoBroker.BrokerService.Persistence;
 
 [DebuggerStepThrough]
-public class BrokerDbContext : EfDbContextBase
+public class CryptoDbContext : EfDbContextBase
 {
-    public BrokerDbContext() : base(databaseName: "broker")
+    public CryptoDbContext() : base(databaseName: "cryptodb")
     {
     }
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,12 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Core\CryptoBroker.UnitOfWork\CryptoBroker.UnitOfWork.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructure\CryptoBroker.Models\CryptoBroker.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Domain\" />
+    <ProjectReference Include="..\..\..\Core\CryptoBroker.Application\CryptoBroker.Application.csproj" />
   </ItemGroup>
 
 </Project>

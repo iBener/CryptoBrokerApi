@@ -15,10 +15,10 @@ namespace CryptoBroker.BrokerService.Domain.Handlers;
 
 public class CancelOrderHandler : IRequestHandler<CancelOrderCommand, OrderModel>
 {
-    private readonly BrokerDbContext _context;
+    private readonly CryptoDbContext _context;
     private readonly IMapper _mapper;
 
-    public CancelOrderHandler(BrokerDbContext context, IMapper mapper)
+    public CancelOrderHandler(CryptoDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

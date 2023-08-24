@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   crypto.apigateway:
-    image: ${DOCKER_REGISTRY-}apigateway
+    image: ${DOCKER_REGISTRY-}cryptoapigateway
     build:
       context: .
       dockerfile: Presentation/ApiGateway/Dockerfile

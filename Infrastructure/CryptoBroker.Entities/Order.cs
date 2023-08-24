@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.Entities;
 
-public class Order
+public class Order : BaseEntity
 {
     public int Id { get; set; }
 

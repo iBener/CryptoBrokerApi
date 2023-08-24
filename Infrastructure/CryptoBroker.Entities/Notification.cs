@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.Entities;
 
-public class Notification
+public class Notification : BaseEntity
 {
     public int Id { get; set; }
 

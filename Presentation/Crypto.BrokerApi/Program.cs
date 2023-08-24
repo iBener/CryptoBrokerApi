@@ -1,21 +1,11 @@
-using Crypto.BrokerApi;
 using Crypto.BrokerApi.BackgroundServices;
 using CryptoBroker.Application;
 using CryptoBroker.Application.Middlewares;
 using CryptoBroker.BrokerService;
 using CryptoBroker.BrokerService.Domain.Commands;
 using CryptoBroker.BrokerService.Persistence;
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using Rebus.Config;
-using Rebus.Persistence.InMem;
-using Rebus.Routing.TypeBased;
-using System;
-using System.ComponentModel;
-using System.Reflection;
+using CryptoBroker.EventBus;
+using CryptoBroker.EventBus.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,13 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddApplicationServices<BrokerService>("Crypto Broker Api");
 builder.Services.AddScoped<IBrokerService, BrokerService>();
-builder.Services.AddDbContext<BrokerDbContext>();
 
 // Event bus
 builder.Services.AddApplicationEventBus<BrokerService>(async bus =>
 {
-    await bus.Subscribe<OrderNotificationSent>();
-    await bus.Subscribe<UpdateNotificationCompleted>();
+    await bus.Subscribe<NotificationSentCommand>();
 });
 
 // Test amaçlý

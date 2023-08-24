@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using CryptoBroker.BrokerService.Persistence;
 using CryptoBroker.Models;
 using CryptoBroker.Models.Enums;
 using CryptoBroker.OrderService.Domain.Queries;
-using CryptoBroker.OrderService.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,10 +15,10 @@ namespace CryptoBroker.OrderService.Domain.Handlers;
 
 public class GetActiveOrderHandler : IRequestHandler<GetActiveOrderQuery, OrderModel>
 {
-    private readonly OrderDbContext _context;
+    private readonly CryptoDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetActiveOrderHandler(OrderDbContext context, IMapper mapper)
+    public GetActiveOrderHandler(CryptoDbContext context, IMapper mapper)
     {
         _mapper = mapper;
         _context = context;

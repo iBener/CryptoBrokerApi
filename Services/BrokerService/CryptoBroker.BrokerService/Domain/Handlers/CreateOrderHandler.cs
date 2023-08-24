@@ -16,11 +16,11 @@ namespace CryptoBroker.BrokerService.Domain.Handlers;
 
 public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderModel>
 {
-    private readonly BrokerDbContext _context;
+    private readonly CryptoDbContext _context;
     private readonly IMapper _mapper;
     private readonly IValidator<CreateOrderCommand> _validator;
 
-    public CreateOrderHandler(BrokerDbContext context, IMapper mapper, IValidator<CreateOrderCommand> validator)
+    public CreateOrderHandler(CryptoDbContext context, IMapper mapper, IValidator<CreateOrderCommand> validator)
     {
         _context = context;
         _mapper = mapper;

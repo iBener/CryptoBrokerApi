@@ -13,9 +13,9 @@ namespace CryptoBroker.BrokerService.Domain.Handlers;
 
 public class CreateOrderNotificationChannelHandler : IRequestHandler<CreateOrderNotificationChannelCommand>
 {
-    private readonly BrokerDbContext _context;
+    private readonly CryptoDbContext _context;
 
-    public CreateOrderNotificationChannelHandler(BrokerDbContext context)
+    public CreateOrderNotificationChannelHandler(CryptoDbContext context)
     {
         _context = context;
     }

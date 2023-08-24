@@ -13,7 +13,7 @@ namespace CryptoBroker.BrokerService.Domain.Commands;
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {
 
-    public CreateOrderCommandValidator(BrokerDbContext context)
+    public CreateOrderCommandValidator(CryptoDbContext context)
     {
         RuleFor(x => DateTime.Today.Day).InclusiveBetween(1, 28)
             .WithMessage("You can enter new order between 1st and 28th day of the month.");

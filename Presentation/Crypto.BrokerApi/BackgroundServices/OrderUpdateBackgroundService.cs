@@ -10,9 +10,9 @@ namespace Crypto.BrokerApi.BackgroundServices;
 /// </summary>
 public class OrderUpdateBackgroundService : BackgroundService
 {
-    private readonly BrokerDbContext _context;
+    private readonly CryptoDbContext _context;
 
-    public OrderUpdateBackgroundService(BrokerDbContext context)
+    public OrderUpdateBackgroundService(CryptoDbContext context)
     {
         _context = context;
     }

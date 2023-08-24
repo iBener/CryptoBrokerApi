@@ -13,13 +13,15 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
-    <PackageReference Include="Rebus.RabbitMq" Version="8.0.0" />
-    <PackageReference Include="Rebus.ServiceProvider" Version="9.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\CryptoBroker.Util\CryptoBroker.Util.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\CryptoBroker.Entities\CryptoBroker.Entities.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\CryptoBroker.EventBus\CryptoBroker.EventBus.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\CryptoBroker.Models\CryptoBroker.Models.csproj" />
+    <ProjectReference Include="..\CryptoBroker.UnitOfWork\CryptoBroker.UnitOfWork.csproj" />
   </ItemGroup>
 
 </Project>

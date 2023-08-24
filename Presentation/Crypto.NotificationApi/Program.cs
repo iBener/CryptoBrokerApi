@@ -1,6 +1,6 @@
 using CryptoBroker.Application;
 using CryptoBroker.NotificationService;
-using CryptoBroker.NotificationService.Persistence;
+using CryptoBroker.EventBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +13,6 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 
 builder.Services.AddApplicationServices<NotificationService>("Crypto Notification Api");
 builder.Services.AddScoped<INotificationService, NotificationService>();
-builder.Services.AddDbContext<NotificationDbContext>();
 
 // Event bus
 builder.Services.AddApplicationEventBus<NotificationService>(async bus =>

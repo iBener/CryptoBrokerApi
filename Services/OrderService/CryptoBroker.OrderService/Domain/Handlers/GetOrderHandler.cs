@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using CryptoBroker.BrokerService.Persistence;
 using CryptoBroker.Models;
 using CryptoBroker.OrderService.Domain.Queries;
-using CryptoBroker.OrderService.Persistence;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,10 +13,10 @@ namespace CryptoBroker.OrderService.Domain.Handlers;
 
 public class GetOrderHandler : IRequestHandler<GetOrderQuery, OrderModel>
 {
-    private readonly OrderDbContext _context;
+    private readonly CryptoDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetOrderHandler(OrderDbContext context, IMapper mapper)
+    public GetOrderHandler(CryptoDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
