@@ -10,14 +10,14 @@ Just open with Visual Studio make sure you select "docker-compose" as startup pr
 Sample create order json:
 ```json
 {
+  "userId": "ibrahim"
   "amount": 100,
   "price": 25000,
   "notificationChannels": [
     "sms",
     "email",
     "push"
-  ],
-  "userId": "ibrahim"
+  ]
 }
 ```
 
