@@ -47,7 +47,7 @@ public class BrokerService : ServiceBase, IBrokerService
         await _bus.Send(new OrderCancelledCommand(orderId));
 
         // Publish cancel order message to notify service via bus
-        await _bus.Send(new OrderCreatedNotifyCommand(result));
+        await _bus.Send(new OrderCancelledNotifyCommand(orderId));
 
         return result;
     }

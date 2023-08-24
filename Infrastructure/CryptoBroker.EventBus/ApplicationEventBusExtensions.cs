@@ -1,6 +1,8 @@
 ﻿using CryptoBroker.EventBus.Commands;
 using Microsoft.Extensions.DependencyInjection;
+using Rebus.Activation;
 using Rebus.Config;
+using Rebus.Retry.Simple;
 using Rebus.Routing.TypeBased;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,10 @@ namespace CryptoBroker.EventBus;
 
 public static class ApplicationEventBusExtensions
 {
-
     public static IServiceCollection AddApplicationEventBus<T>(this IServiceCollection services, Func<Rebus.Bus.IBus, Task>? onCreated = null)
     {
         services.AddRebus(rebus => rebus
+            .Options(b => b.SimpleRetryStrategy(maxDeliveryAttempts: 10))
             .Routing(r =>
                 r.TypeBased().MapAssemblyOf<OrderCreatedCommand>($"crypto-que"))
             .Transport(t =>

@@ -2,8 +2,6 @@ using Crypto.BrokerApi.BackgroundServices;
 using CryptoBroker.Application;
 using CryptoBroker.Application.Middlewares;
 using CryptoBroker.BrokerService;
-using CryptoBroker.BrokerService.Domain.Commands;
-using CryptoBroker.BrokerService.Persistence;
 using CryptoBroker.EventBus;
 using CryptoBroker.EventBus.Commands;
 
@@ -40,8 +38,6 @@ app.UseSwaggerUI(c =>
     c.DefaultModelsExpandDepth(-1);
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crypto Broker Api v1");
 });
-
-app.UseHttpsRedirection();
 
 app.MapControllers();
 

@@ -1,24 +1,21 @@
 using CryptoBroker.Application;
-using CryptoBroker.NotificationService;
+using CryptoBroker.Application.Middlewares;
 using CryptoBroker.EventBus;
+using CryptoBroker.EventBus.Commands;
+using CryptoBroker.NotificationService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<INotificationService, NotificationService>();
-
-
 builder.Services.AddApplicationServices<NotificationService>("Crypto Notification Api");
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
 // Event bus
 builder.Services.AddApplicationEventBus<NotificationService>(async bus =>
 {
-    //await bus.Subscribe<OrderNotificationSent>();
-    //await bus.Subscribe<UpdateNotificationCompleted>();
+    await bus.Subscribe<OrderCreatedNotifyCommand>();
+    await bus.Subscribe<OrderCancelledNotifyCommand>();
 });
 
 builder.Configuration.AddEnvironmentVariables();
@@ -31,15 +28,13 @@ builder.Host.UseDefaultServiceProvider((context, options) =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseApplicationExceptionHandler();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+    c.DefaultModelsExpandDepth(-1);
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crypto Notify Api v1");
+});
 
 app.MapControllers();
 
