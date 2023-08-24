@@ -2,7 +2,8 @@
 
 You can see SwaggerUi of other services with select definition:
 
-![image](https://github.com/iBener/CryptoBrokerApi/assets/5037744/f15b4be0-a358-4c82-acdd-4e09414be685)
+![image](https://github.com/iBener/CryptoBrokerApi/assets/5037744/42f6139f-0ff7-4668-9859-2f8b21ccc8c0)
+
 
 ## Features
 
