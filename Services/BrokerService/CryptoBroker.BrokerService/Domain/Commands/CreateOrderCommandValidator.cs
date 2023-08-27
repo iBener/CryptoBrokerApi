@@ -20,15 +20,15 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
         RuleFor(x => x.Order.Amount).InclusiveBetween(100, 20_000);
         RuleFor(x => x.Order.UserId).NotNull().NotEmpty();
         RuleFor(x => x.Order.Price).GreaterThan(0);
-        //RuleFor(x => x.Order)
-        //    .Must(order =>
-        //    {
-        //        // TODO: Bu tür "validation" işlerini servisler içinde yapmalı
-        //        return !context.Orders.Any(x => 
-        //            x.UserId == order.UserId &&
-        //            x.Status == (int)OrderStatus.Open);
-        //    })
-        //    .WithMessage("You already have an open order.");
+        RuleFor(x => x.Order)
+            .Must(order =>
+            {
+                // TODO: Bu tür "validation" işlerini servisler içinde yapmalı
+                return !context.Orders.Any(x =>
+                    x.UserId == order.UserId &&
+                    x.Status == (int)OrderStatus.Open);
+            })
+            .WithMessage("You already have an open order.");
         //RuleForEach(x => x.NotificationTypes)
         //    .NotNull()
         //    .NotEmpty()
