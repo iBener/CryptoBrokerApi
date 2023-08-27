@@ -3,8 +3,8 @@ using CryptoBroker.BrokerService.Domain.Commands;
 using CryptoBroker.EventBus.Commands;
 using CryptoBroker.Models;
 using CryptoBroker.Models.Requests;
+using MassTransit;
 using MediatR;
-using Rebus.Bus;
 
 namespace CryptoBroker.BrokerService;
 
@@ -30,10 +30,10 @@ public class BrokerService : ServiceBase, IBrokerService
         await _mediator.Send(channelCommand);
 
         // Publish create order message to order service via bus
-        await _bus.Send(new OrderCreatedCommand(result));
+        await _bus.Publish(new OrderCreatedCommand(result));
 
         // Publish create order message to notify service via bus
-        await _bus.Send(new OrderCreatedNotifyCommand(result));
+        await _bus.Publish(new OrderCreatedNotifyCommand(result));
 
         return result;
     }
@@ -44,10 +44,10 @@ public class BrokerService : ServiceBase, IBrokerService
         var result = await _mediator.Send(command);
 
         // Publish cancel order message to order service via bus
-        await _bus.Send(new OrderCancelledCommand(orderId));
+        await _bus.Publish(new OrderCancelledCommand(orderId));
 
         // Publish cancel order message to notify service via bus
-        await _bus.Send(new OrderCancelledNotifyCommand(orderId));
+        await _bus.Publish(new OrderCancelledNotifyCommand(orderId));
 
         return result;
     }

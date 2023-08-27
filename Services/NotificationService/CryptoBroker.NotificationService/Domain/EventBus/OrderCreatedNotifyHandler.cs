@@ -5,8 +5,7 @@ using CryptoBroker.Entities;
 using CryptoBroker.EventBus.Commands;
 using CryptoBroker.Models;
 using CryptoBroker.Models.Enums;
-using Rebus.Bus;
-using Rebus.Handlers;
+using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +15,22 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.NotificationService.Domain.EventBus;
 
-public class OrderCreatedHandler : IHandleMessages<OrderCreatedNotifyCommand>
+public class OrderCreatedNotifyHandler : IConsumer<OrderCreatedNotifyCommand>
 {
     private readonly CryptoDbContext _context;
     private readonly IMapper _mapper;
     private readonly IBus _bus;
 
-    public OrderCreatedHandler(CryptoDbContext context, IMapper mapper, IBus bus)
+    public OrderCreatedNotifyHandler(CryptoDbContext context, IMapper mapper, IBus bus)
     {
         _context = context;
         _mapper = mapper;
         _bus = bus;
     }
 
-    public async Task Handle(OrderCreatedNotifyCommand message)
+    public async Task Consume(ConsumeContext<OrderCreatedNotifyCommand> context)
     {
+        var message = context.Message;
         // Send notifications
         if (message.Order.NotificationChannels?.Any() ?? false)
         {
@@ -46,7 +46,7 @@ public class OrderCreatedHandler : IHandleMessages<OrderCreatedNotifyCommand>
 
                 // Send notification success message
                 var notificationModel = _mapper.Map<NotificationModel>(notification);
-                await _bus.Send(new NotificationSentCommand(notificationModel));
+                await _bus.Publish(new NotificationSentCommand(notificationModel));
             }
 
             // Save order

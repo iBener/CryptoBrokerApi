@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Rebus.RabbitMq" Version="8.0.0" />
-    <PackageReference Include="Rebus.ServiceProvider" Version="9.1.0" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,10 +13,7 @@ builder.Services.AddApplicationServices<BrokerService>("Crypto Broker Api");
 builder.Services.AddScoped<IBrokerService, BrokerService>();
 
 // Event bus
-builder.Services.AddApplicationEventBus<BrokerService>(async bus =>
-{
-    await bus.Subscribe<NotificationSentCommand>();
-});
+builder.Services.AddApplicationEventBus<BrokerService>();
 
 // Test amaçlý
 //builder.Services.AddHostedService<OrderUpdateBackgroundService>();

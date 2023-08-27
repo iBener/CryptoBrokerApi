@@ -5,8 +5,7 @@ using CryptoBroker.Entities;
 using CryptoBroker.EventBus.Commands;
 using CryptoBroker.Models;
 using CryptoBroker.Models.Enums;
-using Rebus.Bus;
-using Rebus.Handlers;
+using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.OrderService.Domain.EventBus;
 
-public class OrderCreatedHandler : IHandleMessages<OrderCreatedCommand>
+public class OrderCreatedHandler : IConsumer<OrderCreatedCommand>
 {
     private readonly CryptoDbContext _context;
     private readonly IMapper _mapper;
@@ -29,8 +28,9 @@ public class OrderCreatedHandler : IHandleMessages<OrderCreatedCommand>
         _bus = bus;
     }
 
-    public async Task Handle(OrderCreatedCommand message)
+    public async Task Consume(ConsumeContext<OrderCreatedCommand> context)
     {
+        var message = context.Message;
         var order = _mapper.Map<Order>(message.Order);
 
         // Save order

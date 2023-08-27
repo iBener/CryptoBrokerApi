@@ -1,7 +1,7 @@
 ﻿using CryptoBroker.BrokerService.Persistence;
 using CryptoBroker.EventBus.Commands;
 using CryptoBroker.Models.Enums;
-using Rebus.Handlers;
+using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.NotificationService.Domain.EventBus;
 
-public class OrderCancelledHandler : IHandleMessages<OrderCancelledCommand>
+public class OrderCancelledHandler : IConsumer<OrderCancelledCommand>
 {
     private readonly CryptoDbContext _context;
 
@@ -19,8 +19,9 @@ public class OrderCancelledHandler : IHandleMessages<OrderCancelledCommand>
         _context = context;
     }
 
-    public async Task Handle(OrderCancelledCommand message)
+    public async Task Consume(ConsumeContext<OrderCancelledCommand> context)
     {
+        var message = context.Message;
         var order = await _context.Orders.FindAsync(message.OrderId);
         if (order != null)
         {

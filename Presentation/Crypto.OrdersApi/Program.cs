@@ -12,11 +12,7 @@ builder.Services.AddApplicationServices<OrderService>("Crypto Orders Api");
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Event bus
-builder.Services.AddApplicationEventBus<OrderService>(async bus =>
-{
-    await bus.Subscribe<OrderCreatedCommand>();
-    await bus.Subscribe<OrderCancelledCommand>();
-});
+builder.Services.AddApplicationEventBus<OrderService>();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Host.UseDefaultServiceProvider((context, options) =>

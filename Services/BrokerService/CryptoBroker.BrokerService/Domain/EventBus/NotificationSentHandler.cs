@@ -2,9 +2,8 @@
 using CryptoBroker.BrokerService.Persistence;
 using CryptoBroker.EventBus.Commands;
 using CryptoBroker.Models.Enums;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Rebus.Bus;
-using Rebus.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CryptoBroker.BrokerService.Domain.EventBus;
 
-public class NotificationSentHandler : IHandleMessages<NotificationSentCommand>
+public class NotificationSentHandler : IConsumer<NotificationSentCommand>
 {
     private readonly CryptoDbContext _context;
 
@@ -22,8 +21,9 @@ public class NotificationSentHandler : IHandleMessages<NotificationSentCommand>
         _context = context;
     }
 
-    public async Task Handle(NotificationSentCommand message)
+    public async Task Consume(ConsumeContext<NotificationSentCommand> context)
     {
+        var message = context.Message;
         var type = Enum.Parse<NotificationType>(message.Notification.NotificationType);
         var notification = await _context.Notifications
             .FirstOrDefaultAsync(x => x.OrderId == message.Notification.OrderId &&

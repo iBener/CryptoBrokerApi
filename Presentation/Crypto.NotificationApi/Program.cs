@@ -12,11 +12,7 @@ builder.Services.AddApplicationServices<NotificationService>("Crypto Notificatio
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
 // Event bus
-builder.Services.AddApplicationEventBus<NotificationService>(async bus =>
-{
-    await bus.Subscribe<OrderCreatedNotifyCommand>();
-    await bus.Subscribe<OrderCancelledNotifyCommand>();
-});
+builder.Services.AddApplicationEventBus<NotificationService>();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Host.UseDefaultServiceProvider((context, options) =>
