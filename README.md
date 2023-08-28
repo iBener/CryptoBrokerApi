@@ -33,5 +33,7 @@ Sample create order json:
 - [x] MassTransit
 - [x] Automapper
 - [x] FluentValidation
+- [ ] ELK Stack
+- [ ] Serilog
 
 
