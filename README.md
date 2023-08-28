@@ -26,7 +26,12 @@ Sample create order json:
 - [x] Clean Architecture
 - [x] API Gateway
 - [x] Docker
+- [x] RabbitMQ
 - [x] CQRS
-- [x] MediatR
-- [x] Rebus.RabbitMQ
 - [ ] Saga Pattern
+- [x] MediatR
+- [x] MassTransit
+- [x] Automapper
+- [x] FluentValidation
+
+
