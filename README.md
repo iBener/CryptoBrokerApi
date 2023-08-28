@@ -27,13 +27,15 @@ Sample create order json:
 - [x] API Gateway
 - [x] Docker
 - [x] RabbitMQ
+- [ ] ELK Stack
 - [x] CQRS
 - [ ] Saga Pattern
 - [x] MediatR
 - [x] MassTransit
+- [ ] Autofac
 - [x] Automapper
 - [x] FluentValidation
-- [ ] ELK Stack
+- [x] Entity Framework Core
 - [ ] Serilog
 
 
