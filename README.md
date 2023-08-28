@@ -27,7 +27,7 @@ Sample create order json:
 - [x] API Gateway
 - [x] Docker
 - [x] RabbitMQ
-- [ ] ELK Stack
+- [ ] ELK Stack (or Graylog)
 - [x] CQRS
 - [ ] Saga Pattern
 - [x] MediatR
